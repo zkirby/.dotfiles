@@ -58,6 +58,8 @@ setopt auto_list # automatically list choices on ambiguous completion
 setopt correct_all # autocorrect commands
 setopt always_to_end # move cursor to end if word had one match
 
+bindkey -s '^[home' 'cd ~; clear^M'
+
 ####################
 ### Path edits #####
 ####################
