@@ -56,6 +56,7 @@ setopt auto_list # automatically list choices on ambiguous completion
 setopt correct_all # autocorrect commands
 setopt always_to_end # move cursor to end if word had one match
 
+bindkey ' ' magic-space
 
 ####################
 ### Path edits #####
@@ -93,12 +94,12 @@ alias dotdown='dotupdate; copy_down; cd -'
 
 # Actual edits
 function editZsh() {
-	v '~/.zshrc'
+	v ~/.zshrc
 	sz
   dotup
 }
 function editV() {
-	v '~/.vim/vimrc'
+	v ~/.vim/vimrc
 	sv
   dotup
 }
