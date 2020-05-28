@@ -40,6 +40,8 @@ alias nrl='npm run lint'
 
 # Vim alias 
 alias v='mvim -v'
+alias vz='v ~/.zshrc'
+alias vv='v ~/.vim/vimrc'
 
 # Alias for directories
 alias cdw='function _f() { local n="$1"; cd ~/Desktop/web-dev; cd ${n}* };_f'
@@ -73,6 +75,8 @@ gitvim() {
   git config --global core.editor "vim"
 }
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # Sync dot files
 dots=('.zshrc' '.vim')
 function copy_up() {
@@ -103,5 +107,6 @@ function editV() {
 }
 alias sz='source ~/.zshrc'
 alias sv='source ~/.vim/vimrc'
-alias vz='editZsh'
-alias vv='editV'
+alias vzu='editZsh'
+alias vvu='editV'
+
