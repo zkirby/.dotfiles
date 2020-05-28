@@ -48,6 +48,7 @@ alias cdw='function _f() { local n="$1"; cd ~/Desktop/web-dev; cd ${n}* };_f'
 alias cdl='function _cdls() { cd "$1" && ls; };_cdls'
 alias lh='ls -a | egrep "^\."'
 alias cat='bat'
+alias yrm='yes | rm -r '
 
 ###################
 ### zsh edits #####
@@ -72,6 +73,8 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 ###################
 ## Maintenance ####
 ###################
+source ~/alias-tips/alias-tips.plugin.zsh
+source ~/zsh-vim-mode/zsh-vim-mode.plugin.zsh
 # Force vim to be default editor for git
 gitvim() {
   git config --global core.editor "vim"
@@ -111,4 +114,3 @@ alias sz='source ~/.zshrc'
 alias sv='source ~/.vim/vimrc'
 alias vzu='editZsh'
 alias vvu='editV'
-
