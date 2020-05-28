@@ -40,10 +40,6 @@ alias nrl='npm run lint'
 
 # Vim alias 
 alias v='mvim -v'
-alias vz='v ~/.zshrc'
-alias sz='source ~/.zshrc'
-alias vv='v ~/.vim/vimrc'
-alias sv='source ~/.vim/vimrc'
 
 # Alias for directories
 alias cdw='function _f() { local n="$1"; cd ~/Desktop/web-dev; cd ${n}* };_f'
@@ -54,7 +50,12 @@ alias cat='bat'
 ###################
 ### zsh edits #####
 ###################
-setopt HIST_IGNORE_ALL_DUPS # ignore duplicated commands history list
+setopt hist_ignore_all_dups # ignore duplicated commands history list
+setopt auto_cd # cd by typing directory name if it's not a command
+setopt auto_list # automatically list choices on ambiguous completion
+setopt correct_all # autocorrect commands
+setopt always_to_end # move cursor to end if word had one match
+
 
 ####################
 ### Path edits #####
@@ -89,3 +90,19 @@ alias dotupdate='cd ~/.dotfiles/; g pull'
 alias dotadd='g add .; gcm "updates"; g push;'
 alias dotup='copy_up; dotupdate; dotadd; cd -'
 alias dotdown='dotupdate; copy_down; cd -'
+
+# Actual edits
+function editZsh() {
+	v '~/.zshrc'
+	sz
+  dotup
+}
+function editV() {
+	v '~/.vim/vimrc'
+	sv
+  dotup
+}
+alias sz='source ~/.zshrc'
+alias sv='source ~/.vim/vimrc'
+alias vz='editZsh'
+alias vv='editV'
