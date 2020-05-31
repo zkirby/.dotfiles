@@ -44,11 +44,18 @@ alias vz='v ~/.zshrc'
 alias vv='v ~/.vim/vimrc'
 
 # Alias for directories
-alias cdw='function _f() { local n="$1"; cd ~/Desktop/web-dev; cd ${n}* };_f'
 alias cdl='function _cdls() { cd "$1" && ls; };_cdls'
 alias lh='ls -a | egrep "^\."'
 alias cat='bat'
 alias yrm='yes | rm -r '
+
+# Workflow aliases
+# -- Coding
+alias cdw='function _f() { local n="$1"; local g="$2"; cd ~/Desktop/web-dev; cd ${n}*; cd ${g}* };_f'
+# -- Writing 
+alias w='function _w() { v "$1"; mdless "$1"; };_w'
+alias ws='cd ~/Desktop/writing/; ga .; gcm "writing save"; g push; cd -'
+alias wg='cd ~/Desktop/writing/'
 
 ###################
 ### zsh edits #####
@@ -65,6 +72,8 @@ bindkey -s '^[home' 'cd ~; clear^M'
 ### Path edits #####
 ####################
 source /Users/ARK/Library/Preferences/org.dystroy.broot/launcher/bash/br
+# PATH edits to include custom scripts
+PATH="${PATH}:/Users/ARK/.dotfiles/scripts"
 # Setting PATH for Python 2.7. The orginal version is saved in .bash_profile.pysave
 PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
 # MacPorts Installer addition on 2015-12-12_at_17:12:35: adding an appropriate PATH variable for use with MacPorts.
@@ -111,6 +120,5 @@ function editV() {
   dotup
 }
 alias sz='source ~/.zshrc'
-alias sv='source ~/.vim/vimrc'
 alias vzu='editZsh'
 alias vvu='editV'

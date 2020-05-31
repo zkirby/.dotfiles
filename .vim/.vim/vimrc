@@ -34,10 +34,36 @@ nmap Q <Nop>
 nmap Y y$
 
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/goyo.vim'
-Plug 'jacoborus/tender.vim'
-Plug 'ycm-core/YouCompleteMe', { 'do': './install --ts-completer' }
+  Plug 'junegunn/goyo.vim'
+  Plug 'jacoborus/tender.vim'
+	Plug 'reedes/vim-colors-pencil'
+  Plug 'reedes/vim-litecorrect'	
+	Plug 'reedes/vim-pencil'
+  Plug 'ycm-core/YouCompleteMe', { 'do': './install --ts-completer' }
+	Plug 'airblade/vim-gitgutter'
+	Plug 'LucHermitte/lh-vim-lib'
+  Plug 'LucHermitte/local_vimrc'
 call plug#end()
+
+" Plugin settings
+" local vim
+let g:local_vimrc = ['._vimrc_local.vim', '_vimrc_local.vim']
+call lh#local_vimrc#munge('whitelist', $HOME.'/Desktop') " Auto accept local_vim
+
+" Pencil
+let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+
+" Per file
+set nocompatible
+filetype plugin on
+
+augroup litecorrect
+  autocmd!
+  autocmd FileType markdown,mkd call litecorrect#init()
+														\ | call pencil#init()
+  autocmd FileType textile call litecorrect#init()
+augroup END
 
 if (has("termguicolors"))
  set termguicolors
@@ -45,3 +71,4 @@ endif
 
 syntax enable
 colorscheme tender
+"colorscheme pencil
