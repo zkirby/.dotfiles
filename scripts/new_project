@@ -17,3 +17,4 @@ git add .
 git commit -m "initial push for repo start"
 hub create
 git push -u origin HEAD
+echo repo $1 created

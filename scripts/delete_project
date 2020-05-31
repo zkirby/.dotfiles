@@ -1,0 +1,14 @@
+#!/bin/bash
+# A basic script to delete an old github project
+# Args: name (name of the repo) [REQUIRED]
+
+if [ $# -eq 0 ]
+then 
+  echo must supply at least a name argument
+	exit 1
+fi
+
+# delete repo
+yes | rm -r $1
+hub delete $1
+echo repo $1 has been deleted
