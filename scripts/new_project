@@ -1,0 +1,19 @@
+#!/bin/bash
+# A basic script to setup a new github project
+# Args: name (name of the repo) [REQUIRED]
+
+if [ $# -eq 0 ]
+then
+  echo must supply at least a name argument
+	exit 1
+fi
+
+# create repository
+mkdir $1
+cd $1
+git init
+cp ~/.dotfiles/scripts/SEED_README.md README.md
+git add .
+git commit -m "initial push for repo start"
+hub create
+git push -u origin HEAD
