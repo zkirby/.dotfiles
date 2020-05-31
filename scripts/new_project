@@ -12,7 +12,7 @@ fi
 mkdir $1
 cd $1
 git init
-cp ~/.dotfiles/scripts/SEED_README.md README.md
+cp ~/.dotfiles/scripts/seeds/SEED_README.md README.md
 git add .
 git commit -m "initial push for repo start"
 hub create

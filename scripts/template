@@ -1,0 +1,26 @@
+#!/bin/bash
+# Create a template from a seed file
+# Args: type (the file type, see types of supported types) [REQUIRED]
+#       name (the name of the new file) [REQUIRED]
+
+if [ $# -lt 2 ]; then
+ echo must supply at least 2 arguments
+ exit 1
+fi
+
+supportedTypes=("vue")
+if [[ ! "${supportedTypes}" =~ "$1" ]]; then
+  echo "must be a supported type ($supportedTypes)"
+	exit 1
+fi
+
+# Actually make the file
+cp ~/.dotfiles/scripts/seeds/$1/SEED $2.$1
+
+# File specific logic (if needed)
+if [ "$1" = "vue" ]; then
+	NEWNAME=$(sed 's/\([a-z0-9]\)\([A-Z]\)/\1-\2/g' <<< $2)
+	NEWNAME=$(tr '[:upper:]' '[:lower:]' <<< $NEWNAME)
+	sed -i.bak "s/template_name/$NEWNAME/g" $2.$1
+	rm $2.$1.bak
+fi
