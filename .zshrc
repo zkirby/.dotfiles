@@ -72,10 +72,12 @@ bindkey -s '^[home' 'cd ~; clear^M'
 ### Path edits #####
 ####################
 source /Users/ARK/Library/Preferences/org.dystroy.broot/launcher/bash/br
+#PATH="/User/ARK/git-fuzzy/bin:$PATH"
 # PATH edits to include custom scripts
 PATH="${PATH}:/Users/ARK/.dotfiles/scripts"
 # Setting PATH for Python 2.7. The orginal version is saved in .bash_profile.pysave
 PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
+PATH="/Users/ARK/git-fuzzy/bin:$PATH"
 # MacPorts Installer addition on 2015-12-12_at_17:12:35: adding an appropriate PATH variable for use with MacPorts.
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 
