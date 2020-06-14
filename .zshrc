@@ -45,6 +45,7 @@ alias vv='v ~/.vim/vimrc'
 
 # Alias for directories
 alias cdl='function _cdls() { cd "$1" && ls; };_cdls'
+alias cdu='cd ..; ls;'
 alias lh='ls -a | egrep "^\."'
 alias cat='bat'
 alias yrm='yes | rm -r '
@@ -55,7 +56,22 @@ alias cdw='function _f() { local n="$1"; local g="$2"; cd ~/Desktop/web-dev; cd 
 # -- Writing 
 alias w='function _w() { v "$1"; mdless "$1"; };_w'
 alias ws='cd ~/Desktop/writing/; ga .; gcm "writing save"; g push; cd -'
-alias wg='cd ~/Desktop/writing/'
+function _wg() {
+	if [ $# -eq 0 ]; then
+		cdl ~/Desktop/writing
+  else
+		local n="$1"
+		cdl ~/Desktop/writing/${n}*
+	fi
+}
+alias wg='_wg'
+function _wr() {
+	cd ~/Desktop/writing/reviews/weekly
+	today=`date +'%Y-%m-%d'`
+	cp ~/Desktop/writing/reviews/weekly/template.md ${today}.md
+  w ${today}.md	
+}
+alias wr='_wr'
 
 ###################
 ### zsh edits #####

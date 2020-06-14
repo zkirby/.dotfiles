@@ -21,10 +21,10 @@ nmap Q <Nop>
 " make Y effect to end of line instead of whole line
 nmap Y y$
 nmap <C-z> 1z=
-nnoremap <A-Up> ,k<CR>
-nnoremap <A-Down> ,j<CR>
-nnoremap <A-Left> ,h<CR>
-nnoremap <A-Right> ,l<CR>
+nnoremap <C-w>k <C-k><CR>
+nnoremap <C-w>j <C-j><CR>
+nnoremap <C-w>h <C-h><CR>
+nnoremap <C-w>l <C-l><CR>
 
 call plug#begin('~/.vim/plugged')
   Plug 'junegunn/goyo.vim'
@@ -39,6 +39,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'LucHermitte/local_vimrc'
 	Plug 'tpope/vim-commentary'
 	Plug 'tpope/vim-surround'
+	Plug 'zxqfl/tabnine-vim'
 call plug#end()
 
 " Plugin settings
