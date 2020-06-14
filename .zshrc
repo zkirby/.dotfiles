@@ -110,7 +110,7 @@ gitvim() {
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Sync dot files
-dots=('.zshrc' '.vim')
+dots=('.zshrc' '.vim/vimrc')
 function copy_up() {
 	for dot in $dots; do
 		cp -r ~/$dot ~/.dotfiles/$dot

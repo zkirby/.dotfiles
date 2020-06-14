@@ -1,9 +1,5 @@
-" Numbering
 set number
 set relativenumber
-
-set autoindent
-" set smartindent
 set tabstop=2
 set backspace=indent,eol,start
 set showmatch
@@ -17,27 +13,59 @@ set mouse=a
 set showcmd
 set matchpairs+=<:>
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ [BUFFER=%n]\ %{strftime('%c')}
-nnoremap <Left>  :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up>    :echoe "Use k"<CR>
-nnoremap <Down>  :echoe "Use j"<CR>
-" ...and in insert mode
-inoremap <Left>  <ESC>:echoe "Use h"<CR>
-inoremap <Right> <ESC>:echoe "Use l"<CR>
-inoremap <Up>    <ESC>:echoe "Use k"<CR>
-inoremap <Down>  <ESC>:echoe "Use j"<CR>
 set noerrorbells visualbell t_vb=
+
 " New Mappings
 " 'Q' in normal mode enters Ex mode. You almost never want this
 nmap Q <Nop> 
 " make Y effect to end of line instead of whole line
 nmap Y y$
+nmap <C-z> 1z=
+nnoremap <C-w>k <C-k><CR>
+nnoremap <C-w>j <C-j><CR>
+nnoremap <C-w>h <C-h><CR>
+nnoremap <C-w>l <C-l><CR>
 
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/goyo.vim'
-Plug 'jacoborus/tender.vim'
-Plug 'ycm-core/YouCompleteMe', { 'do': './install --ts-completer' }
+  Plug 'junegunn/goyo.vim'
+  Plug 'jacoborus/tender.vim'
+	Plug 'reedes/vim-colors-pencil'
+  Plug 'reedes/vim-litecorrect'	
+	Plug 'reedes/vim-pencil'
+	Plug 'reedes/vim-lexical'
+  Plug 'ycm-core/YouCompleteMe', { 'do': './install --ts-completer' }
+	Plug 'airblade/vim-gitgutter'
+	Plug 'LucHermitte/lh-vim-lib'
+  Plug 'LucHermitte/local_vimrc'
+	Plug 'tpope/vim-commentary'
+	Plug 'tpope/vim-surround'
+	Plug 'zxqfl/tabnine-vim'
 call plug#end()
+
+" Plugin settings
+" local vim
+let g:local_vimrc = ['._vimrc_local.vim', '_vimrc_local.vim']
+call lh#local_vimrc#munge('whitelist', $HOME.'/Desktop') " Auto accept local_vim
+
+" Pencil
+let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+
+" Per file
+set nocompatible
+filetype plugin on
+
+augroup litecorrect
+  autocmd!
+  autocmd FileType markdown,mkd call litecorrect#init()
+														\ | call pencil#init()
+  autocmd FileType textile call litecorrect#init()
+augroup END
+
+augroup lexical
+  autocmd!
+  autocmd FileType markdown,mkd call lexical#init()
+augroup END
 
 if (has("termguicolors"))
  set termguicolors
@@ -45,3 +73,4 @@ endif
 
 syntax enable
 colorscheme tender
+"colorscheme pencil
