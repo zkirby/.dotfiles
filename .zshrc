@@ -27,6 +27,7 @@ alias gpof='git push origin HEAD --force-with-lease'
 alias gpp='gco development; g pull; gco -; g rebase development'
 alias gupdate='g fetch upstream; gco master; g merge upstream/master'
 alias gpu='g push -u origin'
+alias gcma='ga .; gcm'
 
 # Gatsby
 alias gyd='gatsby develop'
@@ -54,8 +55,7 @@ alias yrm='yes | rm -r '
 # -- Coding
 alias cdw='function _f() { local n="$1"; local g="$2"; cd ~/Desktop/web-dev; cd ${n}*; cd ${g}* };_f'
 # -- Writing 
-alias w='function _w() { v "$1"; mdless "$1"; };_w'
-alias ws='cd ~/Desktop/writing/; ga .; gcm "writing save"; g push; cd -'
+alias ws='cd ~/Desktop/writing/; ga .; gcm "writing save"; g push; cd -' # write save
 function _wg() {
 	if [ $# -eq 0 ]; then
 		cdl ~/Desktop/writing
@@ -65,13 +65,33 @@ function _wg() {
 	fi
 }
 alias wg='_wg'
+function _lw() {
+	ls -Art | tail -n 3 | head -n 1
+}
+function _wro() {
+	cd ~/Desktop/writing/reviews/weekly
+	bat $(_lw)
+}
 function _wr() {
 	cd ~/Desktop/writing/reviews/weekly
 	today=`date +'%Y-%m-%d'`
 	cp ~/Desktop/writing/reviews/weekly/template.md ${today}.md
-  w ${today}.md	
+  w ${today}.md 
 }
-alias wr='_wr'
+function _wn() {
+	# Split by directory
+	CUR=(pwd)
+	TOSEARCH=(${CUR//writing/ });
+
+	# Search up until we find a template
+	
+	# Copy template to current location
+}
+alias wr='_wr' # creates a review
+alias wro='_wro' # view the review from last week
+alias wn='function _wn() { cp .template "$1" };_wn' # write new
+# -- General 
+alias pp='gshuf -i 1-5 -n 1' # pick a project to work on
 
 ###################
 ### zsh edits #####
@@ -81,8 +101,6 @@ setopt auto_cd # cd by typing directory name if it's not a command
 setopt auto_list # automatically list choices on ambiguous completion
 setopt correct_all # autocorrect commands
 setopt always_to_end # move cursor to end if word had one match
-
-bindkey -s '^[home' 'cd ~; clear^M'
 
 ####################
 ### Path edits #####

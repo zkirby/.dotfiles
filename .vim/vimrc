@@ -20,11 +20,16 @@ set noerrorbells visualbell t_vb=
 nmap Q <Nop> 
 " make Y effect to end of line instead of whole line
 nmap Y y$
+" Instant auto corrects
 nmap <C-z> 1z=
+imap <C-g> <esc>[S<C-z>A
+" Better window switching
 nnoremap <C-w>k <C-k><CR>
 nnoremap <C-w>j <C-j><CR>
 nnoremap <C-w>h <C-h><CR>
 nnoremap <C-w>l <C-l><CR>
+" useful for writing, start at the very bottom
+nnoremap B GA
 
 call plug#begin('~/.vim/plugged')
   Plug 'junegunn/goyo.vim'
