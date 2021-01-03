@@ -44,13 +44,17 @@ class FileTree:
                     clr.printi("skipping " + fname, self.show_skip)
             indent+=1
 
-    def copy_files(self, dest_dir):
+    def copy_and_move_tree(self, dest_dir):
         '''
-        Copy all the files in the file tree to some other directory
+        Copy the directory tree to a new root and update the root.
+
+        Params:
+        dest_dir (string): The directory root to move to
         '''
         def copy_file(file_path):
             shutil.copyfile(file_path, dest_dir + '/' + os.path.basename(file_path))
 
         self.walk_and_apply(copy_file)
+        self.root = dest_dir
 
 

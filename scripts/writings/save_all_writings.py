@@ -9,14 +9,16 @@ import utils.colors as clr
 import utils.files as fl
 
 # --- CONSTANTS ---
-ROOT_DIR = '../../../Desktop/writing'
-DEST_DIR = '../../../Desktop/web-dev/projects/website/website_v6/src/writings'
-SLUG_BASE = '/writing'
+#ROOT_DIR = '../../../Desktop/writing'
+#DEST_DIR = '../../../Desktop/web-dev/projects/website/website_v6/src/writings'
+ROOT_DIR = './test'
+DEST_DIR = '../../../Desktop/testing'
+SLUG_BASE = '/writing/'
 
 def make_slug_text(file_path):
     slug_delim = '---'
 
-    slug_path = '\nslug: ' + '"' + SLUG_BASE + file_path.split(ROOT_DIR)[1].split('.')[0] + '"'
+    slug_path = '\nslug: ' + '"' + SLUG_BASE + os.path.basename(file_path).split('.')[0] + '"'
     date_created = '\ndate: ' + '"' + datetime.datetime.fromtimestamp(os.stat(file_path).st_mtime).strftime("%Y-%d-%m") + '"'
 
     return slug_delim + slug_path + date_created + '\n' + slug_delim + '\n'
@@ -58,12 +60,12 @@ def main(arguments):
     skip_files = ('template.md')
     fileTree = fl.FileTree(ROOT_DIR, file_types, skip_files, args.show_skips)
 
+    clr.printh("Copying files to web directory")
+    fileTree.copy_and_move_tree(DEST_DIR)
+
     clr.printh("Adding slugs")
     slug_fn = add_slug(args.over_ride)
     fileTree.walk_and_apply(slug_fn)
-
-    clr.printh("Copying files to web directory")
-    fileTree.copy_files(DEST_DIR)
 
     clr.printh("Done.")
 
