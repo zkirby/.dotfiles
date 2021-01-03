@@ -9,10 +9,10 @@ import utils.colors as clr
 import utils.files as fl
 
 # --- CONSTANTS ---
-#ROOT_DIR = '../../../Desktop/writing'
-#DEST_DIR = '../../../Desktop/web-dev/projects/website/website_v6/src/writings'
-ROOT_DIR = './test'
-DEST_DIR = '../../../Desktop/testing'
+ROOT_DIR = '../../../Desktop/writing'
+DEST_DIR = '../../../Desktop/web-dev/projects/website/website_v6/src/writings'
+#ROOT_DIR = './test'
+#DEST_DIR = '../../../Desktop/testing'
 SLUG_BASE = '/writing/'
 
 def make_slug_text(file_path):
