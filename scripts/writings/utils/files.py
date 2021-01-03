@@ -42,7 +42,6 @@ class FileTree:
                         clr.printe(str(exp))
                 else:
                     clr.printi("skipping " + fname, self.show_skip)
-            indent+=1
 
     def copy_and_move_tree(self, dest_dir):
         '''
