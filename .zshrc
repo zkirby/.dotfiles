@@ -26,8 +26,10 @@ alias gcfc='git diff --name-only HEAD^ HEAD'
 alias gpof='git push origin HEAD --force-with-lease'
 alias gpp='gco development; g pull; gco -; g rebase development'
 alias gupdate='g fetch upstream; gco master; g merge upstream/master'
-alias gpu='g push -u origin'
+alias gpu='g push -u origin HEAD'
 alias gcma='ga .; gcm'
+alias gcom='gco master'
+alias gclean='git fetch -p && for branch in `git branch -vv --no-color | grep ": gone]" | awk "{print $1}"`; do git branch -D $branch; done'
 
 # Gatsby
 alias gyd='gatsby develop'
@@ -53,7 +55,9 @@ alias yrm='yes | rm -r '
 
 # Workflow aliases
 # -- Coding
-alias cdw='function _f() { local n="$1"; local g="$2"; cd ~/Desktop/web-dev; cd ${n}*; cd ${g}* };_f'
+alias cdw='function _f() { local n="$1"; local g="$2"; cd ~/Desktop/web-dev; cd ${n}*; cdl ${g}* };_f'
+
+alias cdd='cdl ~/Desktop/web-dev/projects/website/website_v6/'
 # -- Writing 
 alias ws='cd ~/Desktop/writing/; ga .; gcm "writing save"; g push; cd -' # write save
 function _wg() {
@@ -76,22 +80,29 @@ function _wr() {
 	cd ~/Desktop/writing/reviews/weekly
 	today=`date +'%Y-%m-%d'`
 	cp ~/Desktop/writing/reviews/weekly/template.md ${today}.md
-  w ${today}.md 
-}
-function _wn() {
-	# Split by directory
-	CUR=(pwd)
-	TOSEARCH=(${CUR//writing/ });
-
-	# Search up until we find a template
-	
-	# Copy template to current location
+  v ${today}.md 
 }
 alias wr='_wr' # creates a review
 alias wro='_wro' # view the review from last week
 alias wn='function _wn() { cp .template "$1" };_wn' # write new
+alias wz='v ~/Desktop/writing/fun/spit sheet.md'
+
 # -- General 
-alias pp='gshuf -i 1-5 -n 1' # pick a project to work on
+function _pp() {
+	RAN_NUM=$(($RANDOM % 5))
+	START=0
+	input=~/.dotfiles/db/projects.txt
+
+	while IFS= read -r line
+	do
+		if (( START == RAN_NUM )); then
+			echo "$line"
+		fi
+	  ((START=START+1))
+	done < "$input"
+}
+alias pp='_pp' # pick a project to work on
+alias pe='v ~/.dotfiles/db/projects.txt' # edit the projects file
 
 ###################
 ### zsh edits #####
@@ -105,6 +116,7 @@ setopt always_to_end # move cursor to end if word had one match
 ####################
 ### Path edits #####
 ####################
+eval "$(rbenv init -)"
 source /Users/ARK/Library/Preferences/org.dystroy.broot/launcher/bash/br
 #PATH="/User/ARK/git-fuzzy/bin:$PATH"
 # PATH edits to include custom scripts
@@ -158,3 +170,6 @@ function editV() {
 alias sz='source ~/.zshrc'
 alias vzu='editZsh'
 alias vvu='editV'
+
+# Added by serverless binary installer
+export PATH="$HOME/.serverless/bin:$PATH"

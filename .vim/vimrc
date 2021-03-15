@@ -1,6 +1,12 @@
 set number
 set relativenumber
+
 set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set autoindent
+
 set backspace=indent,eol,start
 set showmatch
 set incsearch
@@ -14,6 +20,10 @@ set showcmd
 set matchpairs+=<:>
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ [BUFFER=%n]\ %{strftime('%c')}
 set noerrorbells visualbell t_vb=
+
+set mousehide
+
+set scrolloff=4
 
 " New Mappings
 " 'Q' in normal mode enters Ex mode. You almost never want this
@@ -29,7 +39,19 @@ nnoremap <C-w>j <C-j><CR>
 nnoremap <C-w>h <C-h><CR>
 nnoremap <C-w>l <C-l><CR>
 " useful for writing, start at the very bottom
-nnoremap B GA
+noremap B GA
+" useful for notes, creates a line 
+noremap <c-l> 81i-<esc>o
+" move lines up or down
+nnoremap <c-j> :m .+1<CR>==
+nnoremap <c-k> :m .-2<CR>==
+inoremap <c-j> <Esc>:m .+1<CR>==gi
+inoremap <c-k> <Esc>:m .-2<CR>==gi
+vnoremap <c-j> :m '>+1<CR>gv=gv
+vnoremap <c-k> :m '<-2<CR>gv=gv
+" insert the current date
+nnoremap <c-t> :put =strftime('%Y-%m-%d')
+
 
 call plug#begin('~/.vim/plugged')
   Plug 'junegunn/goyo.vim'
@@ -45,6 +67,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'tpope/vim-commentary'
 	Plug 'tpope/vim-surround'
 	Plug 'zxqfl/tabnine-vim'
+  Plug 'logico/typewriter-vim'
+  Plug 'ap/vim-css-color'
 call plug#end()
 
 " Plugin settings
@@ -79,3 +103,10 @@ endif
 syntax enable
 colorscheme tender
 "colorscheme pencil
+"colorscheme typewriter
+
+"----------------------------------------------------
+" Spelling corrections
+" ---------------------------------------------------
+iab shoudl should
+iab taht that
