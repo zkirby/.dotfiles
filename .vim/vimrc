@@ -54,7 +54,7 @@ nnoremap <c-t> :put =strftime('%Y-%m-%d')
 
 
 call plug#begin('~/.vim/plugged')
-  Plug 'junegunn/goyo.vim'
+  " Plug 'junegunn/goyo.vim'
   Plug 'jacoborus/tender.vim'
 	Plug 'reedes/vim-colors-pencil'
   Plug 'reedes/vim-litecorrect'	
@@ -74,7 +74,7 @@ call plug#end()
 " Plugin settings
 " local vim
 let g:local_vimrc = ['._vimrc_local.vim', '_vimrc_local.vim']
-call lh#local_vimrc#munge('whitelist', $HOME.'/Desktop') " Auto accept local_vim
+call lh#local_vimrc#munge('whitelist', $HOME) " Auto accept local_vim
 
 " Pencil
 let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
